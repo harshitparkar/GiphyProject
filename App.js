@@ -7,6 +7,8 @@ import {
   FlatList,
   Dimensions,
   ActivityIndicator,
+  View,
+  Button
 } from 'react-native';
 import {API_KEY, BASE_URL, SEARCH, TRENDING} from '@env';
 import Snackbar from 'react-native-snackbar';
@@ -15,27 +17,19 @@ import {RenderTitle} from './src/Component/RenderTitle';
 import {RenderHeader} from './src/Component/RenderHeader';
 
 export default function App() {
-  //Search States
+  //Gifs States
   const [searchedGifs, setsearchedGifs] = useState([]);
   const [term, updateTerm] = useState('');
-
-  //Gif Categories
   const [trendingGifs, settrendingGifs] = useState([]);
-  const [pageNo, setpageNo] = useState(1);
 
   // Functional States
   const [heading, setheading] = useState(false);
   const [isLoaded, setisLoaded] = useState(false);
   const [isTrendingLoaded, setisTrendingLoaded] = useState(false);
-  
+  const [pageNo, setpageNo] = useState(1);
+
   async function fetchGifs() {
     try {
-      // Search
-      const searchJson = await fetch(
-        `${BASE_URL}/${SEARCH}?api_key=${API_KEY}&q=${term}&limit=10`,
-      );
-      const searchRes = await searchJson.json();
-      setsearchedGifs(searchRes.data);
 
       //Trending
       const trendingJson = await fetch(
@@ -53,20 +47,17 @@ export default function App() {
       });
     }
   } /// add facebook fresco
-  // console.log(artistsGifs)
   useEffect(() => {
     fetchGifs();
   }, [pageNo]);
-  
+
   useEffect(() => {
-    fetchGifs();
+    onEdit();
   });
-  
 
   // ************************* Render Item ********************
-
   function searchRenderItem({item}) {
-    if (isLoaded == false) {
+    if (isLoaded === false) {
       return <ActivityIndicator color={'white'} size={'large'} />;
     } else {
       setheading(true);
@@ -75,7 +66,7 @@ export default function App() {
   }
 
   function renderTrendingItem({item}) {
-    if (isTrendingLoaded == false) {
+    if (isTrendingLoaded === false) {
       return <ActivityIndicator color={'white'} size={'large'} />;
     } else {
       return <RenderImage LinkImage={item.images.original.url} />;
@@ -85,11 +76,11 @@ export default function App() {
   function onEdit(newTerm) {
     updateTerm(newTerm);
   }
- 
+
+
   return (
     <SafeAreaView
       style={{
-        flex: 1,
         backgroundColor: 'black',
       }}>
       <RenderHeader />
@@ -98,7 +89,6 @@ export default function App() {
         placeholder="What's on your mind...."
         placeholderTextColor="black"
         style={styles.textInput}
-        value={term}
         onChangeText={text => onEdit(text)}
       />
       {/* Search Section */}
@@ -106,7 +96,7 @@ export default function App() {
         <Text style={[styles.searchText]}>Your Search</Text>
       ) : (
         <Text style={[styles.searchText, {fontSize: 12}]}>
-          Your Search is Empty. It will be visible here. It May Take Some Time to Load.
+          Your Search is Empty. It will be visible here
         </Text>
       )}
       <FlatList horizontal data={searchedGifs} renderItem={searchRenderItem} />
