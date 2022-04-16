@@ -57,6 +57,11 @@ export default function App() {
   useEffect(() => {
     fetchGifs();
   }, [pageNo]);
+  
+  useEffect(() => {
+    fetchGifs();
+  });
+  
 
   // ************************* Render Item ********************
 
@@ -77,6 +82,9 @@ export default function App() {
     }
   }
 
+  function onEdit(newTerm) {
+    updateTerm(newTerm);
+  }
  
   return (
     <SafeAreaView
@@ -90,14 +98,15 @@ export default function App() {
         placeholder="What's on your mind...."
         placeholderTextColor="black"
         style={styles.textInput}
-        onChangeText={text => updateTerm(text)}
+        value={term}
+        onChangeText={text => onEdit(text)}
       />
       {/* Search Section */}
       {heading ? (
         <Text style={[styles.searchText]}>Your Search</Text>
       ) : (
         <Text style={[styles.searchText, {fontSize: 12}]}>
-          Your Search is Empty. It will be visible here
+          Your Search is Empty. It will be visible here. It May Take Some Time to Load.
         </Text>
       )}
       <FlatList horizontal data={searchedGifs} renderItem={searchRenderItem} />
