@@ -63,5 +63,8 @@ Note: Please install the pre-requisite needed to run React-Native App.
 
 > `<FlatList/>` is React-native Component which helps you to render the data in UI form. We have used numColums to divide page into 2 section to display gifs. onEndReachedThreshold & onEndReached helps us fetch data once you reach the end of the page. We use useState variables as data.
 
+**ScreenShorts**
+
+<img src="https://github.com/harshitparkar/GiphyProject/blob/master/assets/Screen1.jpg" width="128"/> <img src="https://github.com/harshitparkar/GiphyProject/blob/master/assets/Screen2.jpg" width="128"/>
 
 
