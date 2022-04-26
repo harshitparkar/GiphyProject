@@ -8,7 +8,7 @@ import {
   Dimensions,
   ActivityIndicator,
   View,
-  Button
+  TouchableOpacity,
 } from 'react-native';
 import {API_KEY, BASE_URL, SEARCH, TRENDING} from '@env';
 import Snackbar from 'react-native-snackbar';
@@ -35,7 +35,7 @@ export default function App() {
       );
       const searchRes = await searchJson.json();
       setsearchedGifs(searchRes.data);
-      
+
       //Trending
       const trendingJson = await fetch(
         `${BASE_URL}/${TRENDING}?api_key=${API_KEY}&rating=pg-${pageNo}`,
@@ -58,7 +58,7 @@ export default function App() {
 
   useEffect(() => {
     onEdit();
-  },[]);
+  }, []);
 
   // ************************* Render Item ********************
   function searchRenderItem({item}) {
@@ -82,20 +82,30 @@ export default function App() {
     updateTerm(newTerm);
   }
 
-
   return (
     <SafeAreaView
       style={{
         backgroundColor: 'black',
       }}>
       <RenderHeader />
-      {/* Search Input Section */}
-      <TextInput
-        placeholder="What's on your mind...."
-        placeholderTextColor="black"
-        style={styles.textInput}
-        onChangeText={text => onEdit(text)}
-      />
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        {/* Search Input Section */}
+        <TextInput
+          placeholder="What's on your mind...."
+          placeholderTextColor="black"
+          style={styles.textInput}
+          onChangeText={text => onEdit(text)}
+        />
+        <Text onPress={fetchGifs} style={[styles.GoStyle]}>
+          GO
+        </Text>
+      </View>
+
       {/* Search Section */}
       {heading ? (
         <Text style={[styles.searchText]}>Your Search</Text>
@@ -120,7 +130,7 @@ export default function App() {
 }
 const styles = StyleSheet.create({
   textInput: {
-    width: Dimensions.get('screen').width / 1,
+    width: Dimensions.get('screen').width / 1.2,
     height: 40,
     color: 'black',
     backgroundColor: 'white',
@@ -133,5 +143,14 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 15,
     fontWeight: '600',
+  },
+  GoStyle: {
+    color: 'white',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    backgroundColor: '#528ef5',
+    height: 40,
+    width: 40,
+    borderRadius: 5,
   },
 });

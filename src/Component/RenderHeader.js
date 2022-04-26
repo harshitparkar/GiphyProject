@@ -1,18 +1,18 @@
 import React from 'react';
-import {StyleSheet, View, Image, Text,Dimensions} from 'react-native';
+import {StyleSheet, View, Image, Text, Dimensions} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
 export const RenderHeader = props => {
   return (
     <View>
-      <FastImage
+      <Image
         source={require('../../assets/BrandLogo.png')}
         style={[styles.image]}
       />
       <View
         style={{
           flexDirection: 'row',
-          justifyContent:'space-evenly'
+          justifyContent: 'space-evenly',
         }}>
         <Text style={[styles.textStyle, {borderBottomColor: '#2f9dff'}]}>
           Reactions
@@ -35,19 +35,19 @@ export const RenderHeader = props => {
 };
 const styles = StyleSheet.create({
   image: {
-    alignSelf: 'center',
-    margin: 10,
-    height: 20,
-    width: 100,
+    alignSelf:'center',
+    margin:10,
+    height:30,
+    width:120,
   },
   textStyle: {
-    width:Dimensions.get('screen').width/5.5,
+    width: Dimensions.get('screen').width / 5.5,
     fontSize: 10,
     color: 'white',
     fontWeight: '700',
     borderBottomWidth: 5,
-    textAlign:'center',
-    lineHeight:25,
-    marginBottom:5
+    textAlign: 'center',
+    lineHeight: 25,
+    marginBottom: 5,
   },
 });
