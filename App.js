@@ -30,6 +30,12 @@ export default function App() {
 
   async function fetchGifs() {
     try {
+      const searchJson = await fetch(
+        `${BASE_URL}/${SEARCH}?api_key=${API_KEY}&q=${term}&limit=10`,
+      );
+      const searchRes = await searchJson.json();
+      setsearchedGifs(searchRes.data);
+      
       //Trending
       const trendingJson = await fetch(
         `${BASE_URL}/${TRENDING}?api_key=${API_KEY}&rating=pg-${pageNo}`,
