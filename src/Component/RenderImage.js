@@ -5,11 +5,12 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 
 export const RenderImage = (props) => {
   return (
     <View>
-      <Image
+      <FastImage
         resizeMode="contain"
         style={styles.image}
         source={{uri: props.LinkImage}}

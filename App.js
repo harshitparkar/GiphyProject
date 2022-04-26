@@ -30,7 +30,6 @@ export default function App() {
 
   async function fetchGifs() {
     try {
-
       //Trending
       const trendingJson = await fetch(
         `${BASE_URL}/${TRENDING}?api_key=${API_KEY}&rating=pg-${pageNo}`,
@@ -53,7 +52,7 @@ export default function App() {
 
   useEffect(() => {
     onEdit();
-  });
+  },[]);
 
   // ************************* Render Item ********************
   function searchRenderItem({item}) {

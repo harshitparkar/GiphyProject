@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, View, Image, Text,Dimensions} from 'react-native';
+import FastImage from 'react-native-fast-image';
 
 export const RenderHeader = props => {
   return (
     <View>
-      <Image
+      <FastImage
         source={require('../../assets/BrandLogo.png')}
         style={[styles.image]}
       />

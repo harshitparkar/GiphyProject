@@ -23,6 +23,8 @@ target 'GiphyProject' do
 
   pod 'react-native-video', :path => '../node_modules/react-native-video'
 
+  pod 'RNFastImage', :path => '../node_modules/react-native-fast-image'
+
   target 'GiphyProjectTests' do
     inherit! :complete
     # Pods for testing
